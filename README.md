@@ -5,6 +5,7 @@ and then calculate a result of expression. Programm checks input expression to p
 alphabetics letters, redundant operators, unavailable functions. If necessary it throws out message with this symbols.
 For example:
 ```
+> 40 ++ 10
 > Incorrect Expression: ++
 ```
 
