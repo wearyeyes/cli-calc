@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 
 public class ExpressionParser {
     // RPN - Reverse Polish Notation
-    public static ArrayDeque<String> convertToRPN(String inputExpression) {
+    public ArrayDeque<String> convertToRPN(String inputExpression) {
 
         String[] tokens = prepareExpression(inputExpression).split(" ");
         ArrayDeque<String> outputQueue = new ArrayDeque<>();
@@ -38,8 +38,8 @@ public class ExpressionParser {
         return outputQueue;
     }
 
-    public static boolean isNumber(String token) {
-        if (token == null || token.equals("")) return false;
+    public boolean isNumber(String token) {
+        if (token == null) return false;
         try {
             Double.parseDouble(token);
             return true;
@@ -48,7 +48,7 @@ public class ExpressionParser {
         }
     }
 
-    private static int getPriority(String token) {
+    private int getPriority(String token) {
         switch (token) {
             case "*":
             case "/":

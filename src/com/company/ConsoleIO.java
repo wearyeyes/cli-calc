@@ -7,13 +7,22 @@ import java.util.Scanner;
 
 public class ConsoleIO {
     private final Scanner scanner;
+    private Validator validator;
+    private ExpressionParser parser;
+    private Calculator calculator;
 
-    public ConsoleIO() {
+    public ConsoleIO(Validator validator,
+                     ExpressionParser parser,
+                     Calculator calculator) {
         this.scanner = new Scanner(System.in);
+        this.validator = validator;
+        this.parser = parser;
+        this.calculator = calculator;
     }
 
     public void expressionRequest() {
         while (true) {
+            System.out.println("Enter math expression:");
             String inputString = scanner.nextLine().trim();
 
             if (inputString.equals("")) {
@@ -26,14 +35,14 @@ public class ConsoleIO {
                 break;
             }
 
-            if (Validation.validate(inputString)) {
-                ArrayDeque<String> rpn = ExpressionParser.convertToRPN(inputString);
+            if (validator.validate(inputString)) {
+                ArrayDeque<String> rpn = parser.convertToRPN(inputString);
 
                 String calculationResult;
                 try {
-                    calculationResult = MathCalculation.calculate(rpn);
+                    calculationResult = calculator.calculate(rpn);
                 } catch (DividingByZeroException exc) {
-                    System.out.println(exc);
+                    exc.printException();
                     continue;
                 }
 
@@ -46,12 +55,21 @@ public class ConsoleIO {
         scanner.close();
     }
 
-    public void printError(String inputString) {
-        System.out.println("Incorrect Expression: " +
-                Validation.findErrors(inputString) + "\n");
+    public void greeting() {
+        System.out.println(
+                "Hello! This is a console calculator v1.0\n" +
+                        "Enter math expression like '3. + 23 - 34.02 * 100 / .5'\n" +
+                        "Available operations: +, -, *, /\n" +
+                        "In this version you may not use round brackets and negative numbers\n" +
+                        "Enter 'exit' or 'quit' to exit the program\n");
     }
 
     public void printResult(String result) {
         System.out.println("Result: " + result + "\n");
+    }
+
+    public void printError(String inputString) {
+        System.out.println("Incorrect Expression: " +
+                validator.findErrors(inputString) + "\n");
     }
 }

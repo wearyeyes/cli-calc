@@ -6,12 +6,18 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayDeque;
 
-public class MathCalculation {
-    public static String calculate(ArrayDeque<String> expressionInRPN) throws DividingByZeroException {
+public class Calculator {
+    private ExpressionParser parser;
+
+    public Calculator() {
+        this.parser = new ExpressionParser();
+    }
+
+    public String calculate(ArrayDeque<String> expressionInRPN) throws DividingByZeroException {
         ArrayDeque<BigDecimal> stack = new ArrayDeque<>();
 
         for (String token : expressionInRPN) {
-            if (ExpressionParser.isNumber(token)) {
+            if (parser.isNumber(token)) {
                 stack.add(new BigDecimal(token));
             } else {
                 BigDecimal tmp1 = stack.removeLast();

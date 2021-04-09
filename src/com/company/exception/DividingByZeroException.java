@@ -1,5 +1,7 @@
 package com.company.exception;
 
+import java.sql.SQLOutput;
+
 public class DividingByZeroException extends Exception {
     private final String dividend;
     private final String divisor;
@@ -8,8 +10,8 @@ public class DividingByZeroException extends Exception {
         this.dividend = dividend;
         this.divisor = divisor;
     }
-    @Override
-    public String toString() {
-        return "Error. Dividing By Zero: " + dividend + "/" + divisor + "\n";
+
+    public void printException() {
+        System.out.println("Error! Dividing By Zero: " + dividend + "/" + divisor + "\n");
     }
 }
