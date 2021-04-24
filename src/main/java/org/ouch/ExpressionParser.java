@@ -1,14 +1,15 @@
-package com.company;
+package org.ouch;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class ExpressionParser {
     // RPN - Reverse Polish Notation
-    public ArrayDeque<String> convertToRPN(String inputExpression) {
+    public Deque<String> convertToRPN(String inputExpression) {
 
         String[] tokens = prepareExpression(inputExpression).split(" ");
-        ArrayDeque<String> outputQueue = new ArrayDeque<>();
-        ArrayDeque<String> operatorStack = new ArrayDeque<>();
+        Deque<String> outputQueue = new ArrayDeque<>();
+        Deque<String> operatorStack = new ArrayDeque<>();
 
         for (String token : tokens) {
             if (isNumber(token)) {
@@ -34,7 +35,7 @@ public class ExpressionParser {
         while (!operatorStack.isEmpty()) {
             outputQueue.add(operatorStack.removeLast());
         }
-
+        System.out.println(outputQueue);
         return outputQueue;
     }
 

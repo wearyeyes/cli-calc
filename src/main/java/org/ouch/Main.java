@@ -1,4 +1,4 @@
-package com.company;
+package org.ouch;
 
 public class Main {
     public static void main(String[] args) {

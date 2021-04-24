@@ -1,6 +1,4 @@
-package com.company.exception;
-
-import java.sql.SQLOutput;
+package org.ouch.exception;
 
 public class DividingByZeroException extends Exception {
     private final String dividend;

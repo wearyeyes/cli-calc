@@ -1,10 +1,11 @@
-package com.company;
+package org.ouch;
 
-import com.company.exception.DividingByZeroException;
+import org.ouch.exception.DividingByZeroException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Calculator {
     private ExpressionParser parser;
@@ -13,7 +14,7 @@ public class Calculator {
         this.parser = new ExpressionParser();
     }
 
-    public String calculate(ArrayDeque<String> expressionInRPN) throws DividingByZeroException {
+    public String calculate(Deque<String> expressionInRPN) throws DividingByZeroException {
         ArrayDeque<BigDecimal> stack = new ArrayDeque<>();
 
         for (String token : expressionInRPN) {
@@ -45,6 +46,7 @@ public class Calculator {
             }
         }
 
-        return stack.poll().toString();
+        BigDecimal result = stack.poll();
+        return result.stripTrailingZeros().toPlainString();
     }
 }

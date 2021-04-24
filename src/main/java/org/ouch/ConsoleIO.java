@@ -1,8 +1,8 @@
-package com.company;
+package org.ouch;
 
-import com.company.exception.DividingByZeroException;
+import org.ouch.exception.DividingByZeroException;
 
-import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Scanner;
 
 public class ConsoleIO {
@@ -10,6 +10,12 @@ public class ConsoleIO {
     private Validator validator;
     private ExpressionParser parser;
     private Calculator calculator;
+
+    private final String GREETING_MESSAGE = "Hello! This is a console calculator v1.0\n" +
+            "Enter math expression like '3. + 23 - 34.02 * 100 / .5'\n" +
+            "Available operations: +, -, *, /\n" +
+            "In this version you may not use round brackets and negative numbers\n" +
+            "Enter 'exit' or 'quit' to exit the program\n";
 
     public ConsoleIO(Validator validator,
                      ExpressionParser parser,
@@ -36,7 +42,7 @@ public class ConsoleIO {
             }
 
             if (validator.validate(inputString)) {
-                ArrayDeque<String> rpn = parser.convertToRPN(inputString);
+                Deque<String> rpn = parser.convertToRPN(inputString);
 
                 String calculationResult;
                 try {
@@ -56,12 +62,7 @@ public class ConsoleIO {
     }
 
     public void greeting() {
-        System.out.println(
-                "Hello! This is a console calculator v1.0\n" +
-                        "Enter math expression like '3. + 23 - 34.02 * 100 / .5'\n" +
-                        "Available operations: +, -, *, /\n" +
-                        "In this version you may not use round brackets and negative numbers\n" +
-                        "Enter 'exit' or 'quit' to exit the program\n");
+        System.out.println(GREETING_MESSAGE);
     }
 
     public void printResult(String result) {
@@ -72,4 +73,5 @@ public class ConsoleIO {
         System.out.println("Incorrect Expression: " +
                 validator.findErrors(inputString) + "\n");
     }
+
 }
